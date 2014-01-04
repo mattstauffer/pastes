@@ -1,7 +1,7 @@
 <?php
 
-class PasteController extends \BaseController {
-
+class PasteController extends \BaseController
+{
 	public $layout = 'layout';
 
 	public function index()
@@ -21,17 +21,23 @@ class PasteController extends \BaseController {
 			'paste' => 'required'
 		]);
 
-	  if ($validator->fails())
-	  {
-	    return Redirect::route('create')->withErrors($validator);
-	  }
+		if ($validator->fails())
+		{
+			return Redirect::route('create')
+				->withErrors($validator);
+		}
 
-	  $paste = Paste::create([
-	  	'paste' => Input::get('paste'),
-	  	'fork_of' => Input::get('fork', null)
-	  ]);
+		try {
+			$paste = Paste::create([
+				'paste' => Input::get('paste'),
+				'fork_of' => Input::get('fork', null)
+			]);
+		} catch (Exception $e) {
+			return Redirect::route('create')
+				->withErrors($e->getMessage());
+		}
 
-	  return Redirect::route('show', Math::to_base($paste->id));
+		return Redirect::route('show', Math::to_base($paste->id));
 	}
 
 	public function show($paste)
@@ -42,13 +48,13 @@ class PasteController extends \BaseController {
 
 	public function fork($paste)
 	{
-	  $this->layout->content = View::make('create')
-	  	->withFork($paste);
+		$this->layout->content = View::make('create')
+			->withFork($paste);
 	}
 
 	public function raw($paste)
 	{
-	  return Response::make($paste->paste)->header('Content-Type', 'text/plain');
+		return Response::make($paste->paste)->header('Content-Type', 'text/plain');
 	}
 
 	public function diff($paste)
@@ -58,22 +64,24 @@ class PasteController extends \BaseController {
 		$dmp->diff_cleanupSemantic($diffs);
 
 		$diff = '';
-		foreach($diffs as $d) {
-			switch($d[0]) {
+		foreach ($diffs as $d)
+		{
+			switch ($d[0])
+			{
 				case 1:
-					$diff .= "<span class='nocode'><span class='marker ins pull-left'>+</span><ins>".e($d[1])."</ins></span>";
+					$diff .= "<span class='nocode'><span class='marker ins pull-left'>+</span><ins>" . e($d[1]) . "</ins></span>";
 					break;
 				case -1:
-					$diff .= "<span class='nocode'><span class='marker del pull-left'>-</span><del>".e($d[1])."</del></span>";
+					$diff .= "<span class='nocode'><span class='marker del pull-left'>-</span><del>" . e($d[1]) . "</del></span>";
 					break;
 				default:
 					$diff .= e($d[1]);
 			}
 		}
 
-	  $this->layout->content = View::make('diff')
-	  	->withPaste($paste)
-	  	->withDiff($diff);
+		$this->layout->content = View::make('diff')
+			->withPaste($paste)
+			->withDiff($diff);
 	}
 
 }

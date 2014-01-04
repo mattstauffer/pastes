@@ -1,27 +1,42 @@
-body
-{
-  background: #3F3F49;
-	font-family:sans-serif;
-	color : #fff;
+body {
+	background: #3F3F49;
+	font-family: sans-serif;
+	color: #fff;
 }
 
 .navbar {
 	margin-bottom: 0px;
 }
 
+.error-popup {
+	background: #f87265;
+	font-size: ;
+	left: 10rem;
+	position: fixed;
+	right: 10rem;
+	top: 0;
+	z-index: 1100;
+}
+	.error-popup ul {
+		font-size: 12px;
+		list-style-type: none;
+		margin: 0;
+		padding: .75em 1em;
+	}
+
 /* edit textarea */
 
 textarea
 {
-	background-color:transparent;
-	border:0;
-	outline:0;
-	resize:none;
-	color:#fff;
-	width:100%;
-	box-sizing:border-box;
+	background-color: transparent;
+	border: 0;
+	box-sizing: border-box;
+	color: #fff;
 	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
 	font-size: 12px;
+	outline: 0;
+	resize: none;
+	width: 100%;
 }
 
 
