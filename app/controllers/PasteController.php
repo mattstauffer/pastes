@@ -27,6 +27,12 @@ class PasteController extends \BaseController
 				->withErrors($validator);
 		}
 
+		if (Input::get('emp_tee') !== "")
+		{
+			return App::abort(404);
+		}
+
+
 		try {
 			$paste = Paste::create([
 				'paste' => Input::get('paste'),

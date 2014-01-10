@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Laravel Paste Bucket</title>
+	<title>Paste Bucket</title>
 	<meta name="viewport" content="width=device-width">
 
 	{{ HTML::style('css/bootstrap.min.css') }}
@@ -29,8 +29,8 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="http://laravel.com">
-				{{ HTML::image('img/logo-head.png', 'Laravel', ['style' => 'height: 20px;']) }}
+			<a class="navbar-brand" href="/">
+				Simple paste | <small>Note: Everything on this bucket will be wiped daily at 12:00am EST.</small>
 			</a>
 		</div>
 

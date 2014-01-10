@@ -8,6 +8,7 @@
 	@if(isset($fork))
 		{{ Form::hidden('fork', $fork->id) }}
 	@endif
+	{{ Form::hidden('emp_tee') }}
 	{{ Form::close() }}
 @stop
 
